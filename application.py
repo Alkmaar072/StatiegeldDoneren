@@ -18,7 +18,7 @@ from flask_mail import Mail, Message
 
 # Configure application
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "\x99F\x94ZX\xd7!\xae$\xdb\x99\xb6"
+app.config["SECRET_KEY"] = '\xce@G]\x8eAo\xa8\x81O\xc7Yon \xb6'
 
 if __name__ == "__main__":
     app.run(debug = True)
