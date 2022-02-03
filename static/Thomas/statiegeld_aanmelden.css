@@ -1,0 +1,45 @@
+/* Blur voor over artikelen */
+#blur {
+  position: absolute;
+  background: rgb(0 0 0 / 50%);
+  backdrop-filter: blur(3px);
+  width: calc(100vw - 280px);
+  height: 75vh;
+  top: 0;
+  left: 0;
+}
+/* Melding in blur */
+#melding-organisatie {
+  width: 500px;
+  margin: 0 auto;
+  border-radius: 0.3rem;
+}
+/* Box voor organisatie */
+#gegevens-organisatie {
+  position: relative;
+}
+/* Button voor modal favorieten */
+#btn-organisatieZoeken {
+  position: absolute;
+  bottom: 0;
+}
+/* Class voor favoriten in modal */
+.favorieten-organisatie {
+  position: relative;
+  display: flex;
+  border-bottom: 1px solid #dee2e6;
+}
+/* Box voor artikelen */
+#statiegeld-artikelen {
+  overflow-y: scroll;
+  height: 70vh;
+}
+/* Afbeelding artikel */
+.afbeelding-statiegeld {
+  max-width: 150px;
+}
+/* Input aantal */
+.aantal {
+  width: 75px;
+  display: unset;
+}

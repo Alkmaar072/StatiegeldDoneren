@@ -1,0 +1,83 @@
+<!-- Verstuurd code naar application.py -->
+{% extends "layout_register.html" %}
+
+{% block title %}
+  Register user
+{% endblock %}
+
+{% block main %}
+  <!-- Opmaak melding -->
+  <div class="melding" id="melding">Registreren Gebruiker</div>
+    <!-- Registratiecard gebruiker -->
+    <div class="login_body">
+
+    <h2>Nieuwe gebruiker</h2>
+
+    <form action="/register_user" method="post">
+      <!-- Foto -->
+      <div class="imgcontainer-beer">
+        <img src="static/img/avatar.png" alt="profile-beer" class="profile-beer">
+      </div>
+
+        <h1 class="h3 mb-3 fw-normal">Registreren</h1>
+
+        <!-- Input voor registreren waarmee gegevens worden opgeslagen in database-->
+        <div class="container-beer">
+            <label for="voornaam" name="labeltext">Voornaam</label>
+            <input type="text" placeholder="Voornaam" name="voornaam" autocomplete="off" required>
+
+            <label for="achternaam" name="labeltext">Achternaam</label>
+            <input type="text" placeholder="Achternaam" name="achternaam" autocomplete="off" required>
+
+            <!-- Checkt voor email -->
+            <label for="email" name="labeltext">Email-adres <i class="fas fa-envelope"></i></label>
+            <input type="email" size="35" height="20" placeholder="    Email" name="email" autocomplete="off" required>
+
+            <label for="adres" name="labeltext">Adres <i class="fas fa-house"></i></label>
+            <input type="text" placeholder="Adres" name="adres" autocomplete="off" required>
+                
+            <label for="woonplaats" name="labeltext">woonplaats <i class="fas fa-city"></i></label>
+            <input type="text" placeholder="woonplaats" name="woonplaats" autocomplete="off" required>
+
+            <!-- Controleert of postcode voldoet aan de eisen -->
+            <label for="postcode" name="labeltext">postcode <i class="fas fa-city"></i></label>
+            <input type="text" pattern="^[1-9][0-9]{3} ?(?!sa|sd|ss|SA|SD|SS)[A-Za-z]{2}$" placeholder="Postcode" name="postcode" autocomplete="off" required>
+  
+            <!-- Controleert of telefoonnummer bestaat uit getallen -->
+            <label for="telefoonnummer" name="labeltext">telefoonnummer <i class="fas fa-phone"></i></label>
+            <input type="text" pattern="[0-9].{6,}" maxlength="15" placeholder="Telefoonnummer" name="telefoonnummer" autocomplete="off" required>
+          
+            <!-- Checkbox voor geslacht -->
+            <label for="geslacht" name="labeltext">Geslacht <i class="fas fa-venus-mars"></i></label>
+            <input type="radio" placeholder="Man" value="Man" name="geslacht" autocomplete="off" required> Man
+            <input type="radio" placeholder="Vrouw" value="Vrouw" name="geslacht" autocomplete="off" required> Vrouw
+            <input type="radio" placeholder="Anders" value="Anders" name="geslacht" autocomplete="off" required> Anders
+              
+            <!-- Kalender voor geboortedatum input -->
+            <label for="geboortedatum" name="labeltext">Geboortedatum <i class="fas fa-calendar-alt"></i></label>
+            <input type="date" placeholder="Geboortedatum" name="geboortedatum" autocomplete="off" required>
+
+            <!-- Gebruikersnaam tussen 5-20 tekens -->
+            <label for="gebruikersnaam" name="labeltext">Gebruikersnaam <i class="fas fa-user"></i></label>
+            <input type="text" minlength="5" maxlength="20" placeholder="Gebruikersnaam" name="gebruikersnaam" autocomplete="off" required>       
+
+            <!-- Wachtwoord minimaal 5 tekens -->
+            <label for="password">Wachtwoord <i class="fas fa-key"></i></label>
+            <input type="password" minlength="5" placeholder="Wachtwoord" name="password" required>
+
+            <label for="password-repeat">Herhaal wachtwoord <i class="fas fa-key"></i></label>
+            <input type="password" placeholder="Herhaal wachtwoord" name="password-repeat" required>
+
+            <!-- registratie button -->
+            <button class="login_button" type="submit">Registreer</button>                      
+          </div>
+        </form>
+      </div>
+    <!-- Javascript, kleine melding van 2000ms waarbij naam pagina wordt weergegeven -->
+    <script>
+        let melding = document.getElementById('melding');
+        setTimeout(function() {
+        melding.style.cssText = "visibility: none; opacity: 0"
+        }, 2000); // <-- time in milliseconds          
+    </script>
+{% endblock %}

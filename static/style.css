@@ -1,0 +1,212 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+:root {
+  --primaryColor: #000000;
+  --secondairyColor: #bd050b;
+  --thirdColor: #0d6efd;
+  --fourthColor: #4992ff;
+}
+body {
+  height: auto;
+  min-height: 100vh;
+  display: flex;
+}
+/* BEGIN SIDEBAR */
+.container-user {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.container-user a {
+  color: white;
+  text-decoration: none;
+  margin-top: 5px;
+}
+.container-user a:hover {
+  color: var(--fourthColor);
+}
+.container-user img {
+  position: relative;
+  height: 150px;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+.nav li a {
+  font-size: 18px!important;
+}
+.nav li:hover {
+  background-color: var(--fourthColor);
+  border-radius: 0.25rem;
+}
+.nav li:last-of-type {
+  background-color: red;
+  /* 100% lukte niet later ff naar kijken */
+  width: 280px;
+}
+.nav .fa-solid {
+  width: 25px;
+}
+/* END SIDEBAR */
+/* BEGIN SEARCHBAR */
+.container-searchbar {
+  width: calc(100vw - 280px);
+}
+.navbar {
+  width: 100%;
+}
+.navbar-collapse form {
+  margin: 0 auto;
+  display: flex;
+}
+.navbar-collapse form input {
+  width: 30vw;
+}
+.navbar-collapse form label {
+  left: -30px;
+  top: 15px;
+  position: relative;
+}
+.navbar-collapse form .fa-solid {
+  color: white;
+  margin-left: 10px;
+}
+/* END SEARCHBAR */
+
+/* Begin login en registratie */
+
+/* Opmaak button */
+.login_button {
+  background-color: #01835c;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+ /* Verandering van kleur wanneer hover */
+button:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgb(175, 174, 174);
+}
+
+/* Opmaak foto */
+.imgcontainer-beer {
+  text-align: center;
+  margin: 24px 12px;
+  position: relative;
+}
+
+/* Opmaak foto */
+img.profile-beer {
+  width: 40%;
+  border-radius: 50%;
+}
+
+/* Opmaak buttons */
+.container-beer {
+  padding: 16px;
+}
+
+/* Opmaak gebruikersnaam input */
+span.uname {
+  float: left;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* Opmaak wachtwoord input*/
+span.password {
+  float: center;
+  padding-top: 20px;
+  margin-top: px;
+}
+
+/* Opmaak pagina blok */
+.login_body {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 350px;
+  margin: auto;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+}
+/* Begin Gebruikersnaam en wachtwoord */
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 7px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid rgb(189, 189, 189);
+  box-sizing: border-boxsss;
+}
+/* End Gebruikersnaam en wachtwoord */
+
+/*start melding */
+.melding {
+  background: #fcfcfc;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 350px;
+  height: 52px;
+  display: grid;
+  position: fixed;
+  left: 50%;
+  margin: 0 -175px;
+  text-align: center;
+  font-weight: 900;
+  padding: 7px;
+  border-radius: 0px 0px 50px 50px;
+  z-index: 10;
+  border-top: 0px;
+  transition: visibility 0s, opacity 1s linear;
+}
+/* End melding */
+/* End login */
+
+/* START SETTINGS */
+#container-settings{
+  position: relative;
+}
+#btn-wijzigen{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+/* END SETTINGS */
+
+/* START SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: .3rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--fourthColor);
+  border-radius: .3rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--thirdColor);
+}
+/* END SCROLLBAR */
+
+/* max-height for transaction columns */
+#scroll{
+    max-height: 500px;
+}
+.modal-content{
+  background-color: #f8f9fa;
+}

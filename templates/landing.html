@@ -1,0 +1,71 @@
+{% extends "layout_begin(1).html" %}
+
+  {% block javascript %}<script src="/static/klok.js"></script>{% endblock %}
+
+    {% block title %}
+      Landingspagina
+    {% endblock %}
+
+      {% block main %}
+      <!--Navigatiebar voor navigeren over de pagina-->
+        <div class="navi">
+          <ul>
+            <li><a href="#statiegeld">Statiegeld</a></li>
+            <li><a href="#organisatie">Organisaties </a></li>
+            <li><a href="#ons">Over ons</a></li>
+            <li><a href="#contact">Contact </a></li>
+            <li><a href="/contact">Vragen</a></li>
+          </ul>
+        </div>
+
+        <!--hero-image op pagina-->
+        <div class="hero-image1">
+          <div class="hero-text1">
+            <!--Javascript dat groet, afgesteld op bepaalde momenten van de dag-->
+            <h1 id="groet">Goedemiddag,</h1>
+            <h2>Welkom bij statiegelddoneren.nl!</h2><h3>Klik op de knop hieronder om in te loggen of aan te melden!</h3>
+            <!--Button om naar andere pagina te gaan-->
+            <a href = "/login"><button><h3>Inloggen/aanmelden</h3></button></a>
+          </div>
+        </div>
+
+        <!--Kolommen met tekst over concept-->
+        <div class="container">
+          <div class="row pt-5">
+            <div class="col">
+              <img id="statiegeld" class = "icon1" src="../static/img/community.png" alt="community">
+              <h4>Statiegeldflessen over of een kleine extraatje over voor een ander? Help nu verschillende verenigingen en/of stichtingen in de buurt door de statiegeldflessen te sparen. Door middel van sparen helpt u de samenleving weer een heel stuk vooruit! Dus pak een krat of vuilniszak en spaar op voor deze organisaties in de buurt!</h4>
+            </div>
+            <div class="col">
+              <img class = "icon1" src="../static/img/euro.png" alt="geld">
+              <h4>Maar wat gebeurt er met het geld dat u spaart? Het geld wat u spaart wordt door middel van statiegeldflessen overhandigd aan een organisatie! De organisatie kan hier weer goede dingen mee doen zoals eventuele uitbreidingen of verbeteringen binnen deze vereniging of stichting. Ook krijgt u door het inleveren een score in uw profiel te zien! Zo kan je ook nog een strijd aan met mede-donateurs!</h4>
+            </div>
+            <div class="col">
+              <img class = "icon1" src="../static/img/trade.png" alt="samenwerking">
+              <h4>Op het platform kunt u zelf bepalen aan wie de statiegeldflessen gedoneerd moeten worden. U kan dit doen door eerst je statiegeld bij te houden in je profiel en daarna een storting te overhandigen naar deze organisatie. De organisatie zal u een bericht sturen voor een mogelijke tijd. Het enige wat u hoeft te doen is dit te weigeren of accepteren!</h4>
+            </div>
+          </div>
+        </div>
+
+        <!--Class om afstand te houden tussen verschillende kopjes-->
+        <div class = "p-5">
+
+          <!--Image met tekstblok eroverheen-->
+          <div class="organisatie">
+            <img id="organisatie" src="../static/img/voedselbank.jpg" alt="voedselbank">
+            <div class="text-block">
+              <h4>Organisaties</h4>
+              <p>Een van de organisaties die te vinden is op ons platform, is de <a href="https://amsterdam.voedselbank.org/">voedselbank van Amsterdam</a>. Dit is een van de vele organisaties die de donaties van statiegeldflessen uitermatend goed kunnen gebruiken. Vaak kunnen deze kleine bijdragen toch weer zorgen voor meer ruimte binnen een organisatie!</p>
+            </div>
+          </div>
+
+          <!--Algemene tekst-->
+          <h2 id="ons"> <br><br>Over ons</h2>
+          <h3>Maar wie zijn wij dan? Wij zijn Miguel, Thomas, Berend, Insaf, How Jong, Stijn en Stephan. Wij zijn zeven studenten die studeren aan de Universiteit van Amsterdam. Wij alle zeven doen de opleiding informatiekunde. De bedoeling voor dit vak is om een website te bouwen die aan bepaalde eisen voldoet. Dit zijn eisen als een website met een database. Ook brengt deze website enige "features" met zich mee, zoals kunnen inloggen op een account, bepaalde gegevens bij kunnen houden en ook een zoekfunctie krijgen naar organisaties die ook aanwezig zijn op dit platform. <br><br> Wij proberen met hetmaken van dit platform ook een effectief idee de wereld in te brengen. Het idee van het doneren van statiegeldflessen via een digitaal platform zou voor organisaties de mogelijkheid geven om extraatjes te krijgen binnen hun bedrijf. Maar daarbij is wel de hulp van u nodig! Heeft u nog geen account, meld u dan zo snel mogelijk <a href = "/login">hier</a> aan!</h3>
+        </div>
+
+        <!--Contactbar met algemene gegevens van organisatie-->
+        <div class="alert alert-dark" id="contact" role="alert">
+          <h2>Contact</h2><h4>Plaats: Amsterdam</h4><h4>Adres: Science Park 20</h4><h4>Postcode: 1221 AB</h4><h4>Email: statiegelddoneren@gmail.com</h4><h4> Telefoon: (+31) 685785798</h4><h5>Voor vragen, neem <a href="/contact">hier</a> contact met ons op!</h5>
+        </div>
+      {% endblock %}

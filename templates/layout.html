@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% if title %}
+    <title>{{ title }} - Statiegeld Doneren</title>
+    {% else %}
+    <title>statiegelddoneren.nl</title>
+    {% endif %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel = "icon" href = "../static/img/water-bottle.png" type = "image/x-icon">
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <!-- Fontawesome (icons) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <!-- Fontawesome (icons) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Datatables -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/v/dt/jq-3.6.0/jszip-2.5.0/dt-1.11.3/af-2.3.7/b-2.2.1/b-colvis-2.2.1/b-html5-2.2.1/b-print-2.2.1/cr-1.5.5/date-1.1.1/fc-4.0.1/fh-3.2.1/kt-2.6.4/r-2.2.9/rg-1.1.4/rr-1.2.8/sc-2.0.5/sb-1.3.0/sp-1.4.0/sl-1.3.4/sr-1.1.0/datatables.min.css"
+    />
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/v/dt/jq-3.6.0/jszip-2.5.0/dt-1.11.3/af-2.3.7/b-2.2.1/b-colvis-2.2.1/b-html5-2.2.1/b-print-2.2.1/cr-1.5.5/date-1.1.1/fc-4.0.1/fh-3.2.1/kt-2.6.4/r-2.2.9/rg-1.1.4/rr-1.2.8/sc-2.0.5/sb-1.3.0/sp-1.4.0/sl-1.3.4/sr-1.1.0/datatables.min.js"
+    ></script>
+
+    <link rel="stylesheet" href="/static/style.css" />
+    {% block javascript %}{% endblock %}
+    {% block css %}{% endblock %}
+
+    <title>Statiegeldoneren.nl - {% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <!-- BEGIN SIDEBAR -->
+    <div
+      class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
+      style="width: 280px"
+    >
+      <div class="container-user">
+        <!-- Kijk wie er ingelogd is en laat dan de juiste foto zien -->
+        <img {% if session.get("particulier") %} {{ "src=" +
+        session.get("particulier")["profielfoto_url"] if
+        session.get("particulier")["profielfoto_url"] else
+        "src=/static/img/avatar.png" }} {% elif session.get("organisatie") %} {{
+        "src=" + session.get("organisatie")["profilefoto_url"] if
+        session.get("organisatie")["profilefoto_url"] else
+        "src=/static/img/cor_avatar.jpg" }} {% endif %} class="img-thumbnail"
+        alt="Image user" />
+        {% if session.get("particulier") %}
+        <a
+          href={{ "/profile?type="+ "particulier" +"&id=" + session.get("particulier")["id"]|string }}
+          class="fs-4 fw-bold"
+        >
+        {% elif session.get("organisatie") %}
+        <a
+          href={{ "/profile?type="+ "organisatie" +"&id=" + session.get("organisatie")["id"]|string }}
+          class="fs-4 fw-bold"
+        >
+        {% endif %}
+          <!-- Kijken wie er ingelogd is -->
+          {% if session.get("particulier") %}
+          <!-- Laat de voor en achternaam zien van de particulier -->
+          {{ session.get("particulier")["voornaam"] + " " + session.get("particulier")["achternaam"]}}
+          {% elif session.get("organisatie") %}
+          <!-- Laat de organisatienaam zien van de particulier -->
+          {{ session.get("organisatie")["organisatie_naam"]}}
+          {% endif %}
+        </a>
+      </div>
+      <hr />
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a
+            href="/dashboard_organisatie"
+            class="nav-link text-white fs-5 fw-bold {{ 'active' if session.get('active_page') == 'dashboard' }}"
+            aria-current="page"
+          >
+            <i class="fa-solid fa-chart-line"></i>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a
+            href="/verkenner"
+            class="nav-link text-white fs-5 fw-bold {{ 'active' if session.get('active_page') == 'verkenner' }}"
+          >
+            <i class="fa-solid fa-binoculars"></i>
+            Verkenner
+          </a>
+        </li>
+        <!-- Kijken of particulier ingelogd is -->
+        {% if session.get("particulier") %}
+        <!-- Laat de donaties button zien -->
+        <li>
+          <a
+            href="/statiegeld_aanmelden"
+            class="nav-link text-white fs-5 fw-bold
+            {{ 'active' if session.get('active_page') == 'statiegeld_aanmelden' }}"
+          >
+            <i class="fa-solid fa-hand-holding-dollar"></i>
+            Statiegeld aanmelden
+          </a>
+        </li>
+        {% endif %}
+        <!-- Kijken of organisatie ingelogd is -->
+        {% if session.get("organisatie") %}
+        <!-- Laat de donaties button zien -->
+        <li>
+          <a
+            href="/donaties"
+            class="nav-link text-white fs-5 fw-bold {{ 'active' if session.get('active_page') == 'donaties' }}"
+          >
+            <i class="fa-solid fa-clipboard-list"></i>
+            Donaties
+          </a>
+        </li>
+        {% endif %}
+        <li>
+          <a
+            href="/settings"
+            class="nav-link text-white fs-5 fw-bold {{ 'active' if session.get('active_page') == 'settings' }}"
+          >
+            <i class="fa-solid fa-gears"></i>
+            Settings
+          </a>
+        </li>
+        <li class="fixed-bottom">
+          <a href="/logout" class="nav-link text-white fs-5 fw-bold">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- END SIDEBAR -->
+
+    <!-- BEGIN MAIN -->
+    <main class="container-p5">
+      <!-- BEGIN SEARCHBAR -->
+      <div class="container-searchbar">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarsExample05"
+              aria-controls="navbarsExample05"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsExample05">
+              <form action="/verkenner" method="get">
+                <input
+                  class="form-control"
+                  name="q"
+                  type="search"
+                  placeholder="Naam organisatie of plaats"
+                  aria-label="Search"
+                  id="searchbar-input"
+                  autocomplete="off"
+                />
+                <button
+                  class="btn btn-primary ms-2"
+                  type="submit"
+                  value="Zoeken"
+                >
+                  Zoeken<i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <!-- END SEARCHBAR -->
+      <div class="p-4" id="content-block">{% block main %}{% endblock %}</div>
+    </main>
+    <!-- END MAIN -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

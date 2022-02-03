@@ -1,0 +1,142 @@
+{% extends "layout.html" %} {% block title %} Dashboard {% endblock %} {% block
+main %}
+  <script>
+  $(document).ready(function () {
+    // De Lopende transacties tabel aanmaken
+    var table = $("#example").DataTable({
+      dom: 'Bfrtip',
+      // Ajax route initialiseren
+      ajax: {
+        url: "/dashboard/inBehandeling",
+        type: "POST",
+        contentType: "application/json",
+      },
+      // De kolommen met knop
+      columns: [
+        { data: "Datum" },
+        { data: "Ophaalmoment" },
+        { data: "Status" },
+        { data: "Organistatie" },
+        { data: "Waarde" },
+        {
+          targets: 1,
+          data: null,
+          defaultContent: "<button class='btn btn-primary btn-sm'>Afronden</button>"}
+      ]
+    });
+    // De functie voor wanneer je op de Afronden knop klikt. Pakt de donatieId en stopt deze in een json file zodat je deze in Flask kan gebruiken.
+    $('#example tbody').on( 'click', 'button', function () {
+        var data = table.row( $(this).parents('tr') ).data();
+        var donatieId = data["Id"]
+        let donatieIds = {};
+        donatieIds["donatieId"] = donatieId;
+        $.ajax ({
+          url:"/dashboard_organisatie/afronden",
+          type:"POST",
+          data: JSON.stringify(donatieIds),
+          contentType: "application/json",
+          dataType: "json",
+     });
+     })
+    });
+  </script>
+        <!-- De div voor de dag, week, maand en jaarwaarde -->
+        <div class="timeframe p-4">
+            <h2>Punten <i class="far fa-star fa-xs"></i></h2>
+            <div class="row align-items-center" style="position: relative; left: 12px;">
+                <!-- Dagwaarde kolom -->
+                <div class="border border-primary .3rem col-3 col-md-2 mb-4 mb-md-0">
+                    <h2 class="text-center" style="position: relative; top: 20px">
+                      {{ dagWaarde[0]["waarde"] }}
+                    </h2>
+                    <br>
+                    <h3 class="text-center text-muted">Dag</h3>
+                </div>
+                <!-- Weekwaarde kolom -->
+                <div class="border border-primary .3rem col-3 col-md-2 mb-4 mb-md-0 offset-1">
+                    <h2 class="text-center" style="position: relative; top: 20px">
+                    {{ weekWaarde[0]["waarde"] }}
+                    </h2>
+                    <br>
+                    <h3 class="text-center text-muted">Week</h3>
+                </div>
+                <!-- Maandwaarde kolom -->
+                <div class="border border-primary .3rem col-3 col-md-2 mb-4 mb-md-0 offset-1">
+                    <h2 class="text-center" style="position: relative; top: 20px">
+                    {{ maandWaarde[0]["waarde"] }}
+                    </h2>
+                    <br>
+                    <h3 class="text-center text-muted">Maand</h3>
+                </div>
+                <!-- Jaarwaarde kolom -->
+                <div class="border border-primary .3rem col-3 col-md-2 mb-4 mb-md-0 offset-1">
+                    <h2 class="text-center" style="position: relative; top: 20px">
+                    {{ jaarWaarde[0]["waarde"] }}
+                    </h2>
+                    <br>
+                    <h3 class="text-center text-muted">Jaar</h3>
+                </div>
+            </div>
+        </div>
+<!-- De div voor de twee transactietabellen -->
+<div class="transacties p-4">
+  <div class="mt-auto row">
+    <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+      <!-- De div voor lopende transacties -->
+      <h2>Lopende transacties <i class="fas fa-shoe-prints fa-xs"></i></h2>
+      <div class="overflow-auto border border-primary" id="scroll">
+        <table id="example" class="display" style="width: 100%">
+          <thead>
+            <tr>
+              <th>Datum</th>
+              <th>Ophaalmoment</th>
+              <th>Status</th>
+              <th>Vereniging</th>
+              <th>Waarde</th>
+              <th>Knop</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+    <script>
+    // De Transactiegeschiedenistabel initialiseren  
+    $(document).ready(function () {
+      $("#geschiedenis").DataTable({
+        ajax: {
+          url: "/dashboard/Bevestigd",
+          type: "POST",
+          contentType: "application/json",
+        },
+        columns: [
+          { data: "Datum" },
+          { data: "Ophaalmoment" },
+          { data: "Afgerond op" },
+          { data: "Status" },
+          { data: "Organistatie" },
+          { data: "Waarde" }
+        ],
+      });
+    });
+  </script>
+    <!-- De div voor transactiegeschiedenis -->
+    <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+      <h2>Transactiegeschiedenis <i class="fas fa-history fa-xs"></i></h2>
+      <div class="overflow-auto border border-primary" id="scroll">
+        <table id="geschiedenis" class="display" style="width: 100%">
+          <thead>
+            <tr>
+              <th>Datum</th>
+              <th>Opgehaald op</th>
+              <th>Afgerond op</th>
+              <th>Status</th>
+              <th>Vereniging</th>
+              <th>Waarde</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

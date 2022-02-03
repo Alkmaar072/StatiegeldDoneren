@@ -1,0 +1,39 @@
+{% extends "layout_register.html" %}
+
+  {% block title %}
+      Register user
+  {% endblock %}
+
+      {% block main %}
+      <!--Begin contactformulier-->
+      <div class="login_body">
+        <h2>Contactformulier</h2>
+        <form action="/contact" method="post">
+            <div class="imgcontainer-beer">
+                <img src="static/img/vraagteken.jpg" alt="profile-beer" class="profile-beer">
+            </div>
+            <h1 class="h3 mb-3 fw-normal">Vul hieronder alles in</h1>
+            <!--Openen input voor gebruikers-->
+            <div class="container-beer">
+
+              <label for="naam" name="labeltext">Naam</label>
+              <input type="text" placeholder="Naam" name="naam" autocomplete="off" required>
+
+              <label for="email" name="labeltext">Email</label>
+              <input type = "text" placeholder="Email" name="email" autocomplete="off" required>
+
+              <label for="telefoonnummer" name="labeltext">Telefoonnummer</label>
+              <input type="text" placeholder="Telefoonnummer" name="telefoonnummer" autocomplete="off" required>
+
+              <label for="onderwerp" name="labeltext">Onderwerp</label>
+              <input type="text" placeholder="Onderwerp" name="onderwerp" autocomplete="off" required>
+
+              <label for="omschrijving" name="labeltext">Omschrijving</label>
+              <input type="text" placeholder="Omschrijving" name="omschrijving" autocomplete="off" required>
+
+              <!--Verstuurd button-->
+              <button class="login_button" type="submit">Verstuur</button>
+            </div>
+        </form>
+      </div>
+      {% endblock %}

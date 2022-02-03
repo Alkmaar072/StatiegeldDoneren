@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+{% block title %} Statiegeld aanmelden {% endblock%}
+{% block javascript %}<script src="/static/Thomas/statiegeld_aanmelden.js"></script>{% endblock %} 
+{% block css %}<link rel="stylesheet" href="/static/Thomas/statiegeld_aanmelden.css" />{% endblock %}
+
+{% block main %}
+<div class="container-fluid mb-2" id="statiegeld-artikelen">
+  <div id="blur">
+    <div class="bg-white text-center p-5 mt-5" id="melding-organisatie"><p><strong>Graag eerst een organisatie selecteren.</strong></p><small>Dit kunt u links onderin doen.</small></div>
+  </div>
+  <!--Start grid row-->
+  <div class="row mb-2 row-cols-3">
+    {% for artikel in artikelen %}
+
+    <!--Start grid column-->
+    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 statiegeld-card">
+        <img src="{{ artikel["img_url"] }}" class="img-thumbnail afbeelding-statiegeld" alt="Foto artikel" />
+      <div class="mb-4 p-2">
+        <h2>{{ artikel["naam"]}}</h2>
+        <p class="info-statiegeld-artikel">{{ artikel["omschrijving"]}}</p>
+        <p>Waarde: €<span id="waarde">{{ artikel["waarde"]}}</span></p>
+        <span>Aantal:</span><input type="number" class="form-control aantal" name="aantal" id="{{ artikel["id"]
+        }}" min="0" value="0" autocomplete="off">
+        <div class="mt-3">
+          <button class="btn btn-primary ps-4 pe-4 hoog">
+            +
+          </button>
+          <button class="btn btn-outline-primary ps-4 pe-4 laag">
+            -
+          </button>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <!--End grid column-->
+
+  </div>
+  <!--End grid row-->
+</div>
+
+<!--Start grid row-->
+<div class="row info-aanmelden">
+  <div class="col-lg-4 col-md-6 col-sm-12" id="gegevens-organisatie">
+
+    <!-- Kijk of er een favoriet actief is -->
+    {% if favorietId is not defined %}
+    <!-- Geen favoriet laat button zien -->
+    <button type="button" class="btn btn-primary btn-lg ps-5 pe-5 m-3" id="btn-organisatieZoeken"
+      data-bs-toggle="modal" data-bs-target="#organisatieZoeken">
+      Kies een favoriet
+    </button>
+
+    {{ favorietId }} {% else %}
+    <!-- Wel favoriet laat gegevens zien -->
+    <h3>Organisatie:</h3>
+    <p>
+      {{ favorietOrganisatie[0]["organisatie_naam"] }}<br/>
+      {{favorietOrganisatie[0]["adres"] }}<br/>
+      {{favorietOrganisatie[0]["vestigingsplaats"] }}
+    </p>
+    {% endif %}
+  </div>
+
+  <!-- Subtotaal, doneren en weigeren -->
+  <div class="col-lg-8 col-md-6 col-sm-12 p-3 text-end submit">
+    <h3>Subtotaal: €<span id="subtotaalEuro">0</span></h3>
+    <h3>Subtotaal punten: <span id="subtotaalPunt">0</span></h3>
+    <div class="buttons">
+      <button class="btn btn-danger btn-lg ps-5 pe-5" onclick="weigerenDoneren()">Weigeren</button>
+      <button
+        class="btn btn-primary btn-lg ps-5 pe-5"
+        onclick="submitDoneren()"
+      >
+        Doneren
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Start organisatieZoeken -->
+<div class="modal fade" id="organisatieZoeken" tabindex="-1"
+  aria-labelledby="organisatieZoekenLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <!-- Header modal -->
+      <div class="modal-header">
+        <h3 class="modal-title" id="organisatieZoekenLabel">
+          Favorieten organisaties
+        </h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <!-- Header modal -->
+      <div class="modal-body">
+        <form action="/statiegeld_aanmelden" method="get">
+          <!-- Kijk of er favorieten zijn -->
+          {% if not favorieten %}
+          <!-- Geen favorieten laat zoek knop zien -->
+          <div class="favorieten-organisatie mb-3 p-1">
+            <h5 class="h5 col-8">Geen favorieten gevonden.</h5>
+            <a href="/verkenner" class="btn btn-primary" id="zoek">Zoek favorieten</a>
+          </div>
+
+          {% else%}
+            {% for favoriet in favorieten %}
+            <!-- Wel favorieten laat gegevens zien -->
+            <div class="favorieten-organisatie mb-3 p-1">
+              <label class="form-check-label col-8 h4" for="{{ favoriet["id"] }}">{{ favoriet["organisatie_naam"]}}</label>
+              <input class="form-check-input" type="radio" name="organisatie" id="{{ favoriet["id"] }}"
+              value="{{ favoriet["id"] }}">
+            </div>
+            {% endfor %}
+          <button type="submit" class="btn btn-primary">Bevestig</button>
+          {% endif %}
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- End organisatieZoeken -->
+{% endblock %}

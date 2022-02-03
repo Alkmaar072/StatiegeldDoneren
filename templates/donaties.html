@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% block title %} Statiegeld aanmelden {% endblock%}
+{% block javascript %}<script src="/static/Thomas/donaties.js"></script>{% endblock %}
+{% block main %}
+<script>
+</script>
+
+<!-- Tabel voor DataTable -->
+<div class="row margin-25">
+  <table id="donaties" class="display w-100">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Id</th>
+        <th>Adres</th>
+        <th>Profiel</th>
+        <th>Waarde</th>
+        <th>Punten</th>
+        <th>Datum</th>
+        <th>Status</th>
+        <th>Ophaalmoment</th>
+        <th>Afgerond</th>
+        <th></th>
+      </tr>
+    </thead>
+  </table>
+</div>
+
+<!-- Start ophaalModal -->
+<div class="modal fade" id="ophaalModal" tabindex="-1"
+  aria-labelledby="ophaalModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <!-- Header modal -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="ophaalModalLabel">Plan ophaalmoment</h5>
+        <button type="button" class="btn-close"
+          data-bs-dismiss="modal" aria-label="Close" ></button>
+      </div>
+
+      <!-- Body modal -->
+      <div class="modal-body">
+        <!-- Gegevens uitvragen voor ophaalmoment -->
+        <div class="row g3">
+          <p class="text-center">
+            Omdat wij niet willen dat u voor niets aan de deur komt kunt u pas
+            <strong>2 dagen</strong> na vandaag de spullen ophalen.
+          </p>
+          <div class="col-md-12 mb-3">
+            <label for="datum" class="form-label">Ophaaldatum</label>
+            <input type="date" id="datum" min="{{ date }}"
+              value="{{ date }}" class="form-control" />
+          </div>
+          <div class="col-md-6">
+            <label for="startTime" class="form-label">Begin ophaalmoment</label>
+            <input type="time" id="startTime" value="18:00" class="form-control"/>
+          </div>
+          <div class="col-md-6">
+            <label for="endTime" class="form-label">Einde ophaalmoment</label>
+            <input type="time" id="endTime" value="20:00" class="form-control"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Sluit
+        </button>
+        <button type="button" class="btn btn-primary" onclick="bevestigingOphaal()">
+          Bevestig ophaalmoment
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- End ophaalModal -->
+
+<!-- BEGIN ModalDonatieRegels -->
+<div class="modal fade" id="donatieRegels" tabindex="-1"
+  aria-labelledby="donatieRegelsLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" >
+    <div class="modal-content">
+
+      <!-- Header modal -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="donatieRegelsLabel">Zie donatie in</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+      </div>
+
+      <!-- Body modal -->
+      <div class="modal-body">
+        <div class="row g3">
+          <!-- Tabel voor donatieregels -->
+          <table class="table table-striped table-hover" id="donatieRegelsTable">
+            <thead>
+              <tr>
+                <th scope="col">Aantal</th>
+                <th scope="col">Naam</th>
+                <th scope="col">Omschrijving</th>
+                <th scope="col">Waarde</th>
+                <th scope="col">Punten</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Footer modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Sluit
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- END Modal -->
+
+{% endblock %}

@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profiel
+{% endblock %}
+
+{% block main %}
+{% if not profile %}
+  <p> Geen gebruiker gevonden! </p>
+
+{% else %}
+<!-- Laat profielgegevens zien -->
+    <div class ="card" style ="width:80%; margin-left:5%; min-height: 3rem;">
+    <h1> Profile </h1>
+    <div id = profile> <image style = "width: 160px; border-radius:60%; height: 160px; object-fit: cover;" id="profielfoto" {{ "src=" + profile[0].profilefoto_url if profile[0].profilefoto_url else "src=/static/img/avatar.png" }} 
+       alt="profielfoto"/></div>
+     <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">{% if 'voornaam' in profile[0]  %} Naam {% elif 'organisatie_naam' in profile[0] %} Organisatie Naam {% endif %}</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% if 'voornaam' in profile[0] %}
+                      {{ profile[0]["voornaam"] + " " + profile[0]["achternaam"] }}
+                      {% elif 'organisatie_naam' in profile[0] %}
+                      {{ profile[0]["organisatie_naam"] }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <hr>  
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Email</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% if 'voornaam' in profile[0]  %}
+                      {{ profile[0]["email"] }}
+                      {% elif 'organisatie_naam' in profile[0] %}
+                      {{ profile[0]["email"] }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Adres</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% if 'voornaam' in profile[0]  %}
+                      {{ profile[0]["adres"] }}
+                      {% elif 'organisatie_naam' in profile[0] %}
+                      {{ profile[0]["adres"] }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Postcode</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% if 'voornaam' in profile[0]  %}
+                      {{ profile[0]["postcode"] }}
+                      {% elif 'organisatie_naam' in profile[0] %}
+                      {{ profile[0]["postcode"] }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0"> {% if 'voornaam' in profile[0]  %} Woonplaats {% elif 'organisatie_naam' in profile[0] %} Vestigingsplaats {% endif %} </h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {% if 'voornaam' in profile[0] %}
+                      {{ profile[0]["woonplaats"] }}
+                      {% elif 'organisatie_naam' in profile[0] %}
+                      {{ profile[0]["vestigingsplaats"] }}
+                      {% endif %}
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <a class="btn btn-info " target="" href="settings">Edit</a>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+              </div>
+
+  {% endif %}
+{% endblock %}
+
+<!DOCTYPE html>
+

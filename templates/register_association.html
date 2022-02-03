@@ -1,0 +1,77 @@
+<!-- Verstuurd code naar application.py -->
+{% extends "layout_register.html" %}
+
+{% block title %}
+Register user
+{% endblock %}
+               
+{% block main %}
+<!-- Opmaak melding -->
+<div class="melding" id="melding">Registreren Organisatie</div>
+<!-- Registratiecard organisatie -->
+<div class="login_body">
+
+    <h2>Nieuwe organisatie</h2>
+
+    <form action="/register_association" method="post">
+        <!-- Foto -->
+        <div class="imgcontainer-beer">
+            <img src="static/img/cor_avatar.jpg" alt="profile-beer" class="profile-beer">
+        </div>
+
+        <h1 class="h3 mb-3 fw-normal">Registreren</h1>
+
+        <!-- Input registratie organisatie waar gegevens worden opgeslagen in database-->
+        <div class="container-beer">
+            <label for="organisatie_naam" name="labeltext">Naam organisatie <i class="fas fa-building"></i></i></label>
+            <input type="text" placeholder="Naam organisatie" name="organisatie_naam" autocomplete="off" required>
+
+            <!-- KVK nummer van precies 8 getallen -->
+            <label for="kvk_nummer">KVK-nummer</label>
+            <input type="text" pattern="[0-9]{8}" placeholder="8-cijferige KVK-nummer" autocomplete="off" name="kvk_nummer" required>
+
+            <!-- Controleert op email -->
+            <label for="email">Email <i class="fas fa-envelope"></i></label>
+            <input type="email" size = "35" placeholder="Email" name="email" required>
+
+            <label for="adres" name="labeltext">Adres <i class="fas fa-house"></i></label>
+            <input type="text" placeholder="Adres" name="adres" autocomplete="off" required>
+
+            <!-- Controleert of postcode voldoet aan de eisen -->
+            <label for="postcode" name="labeltext">Postcode <i class="fas fa-house"></i></label>
+            <input type="text" pattern="[0-9]{4}[A-Za-z]{2}" placeholder="Postcode" name="postcode" autocomplete="off" required>
+
+            <label for="vestigingsplaats" name="labeltext">Vestigingsplaats <i class="fas fa-house"></i></label>
+            <input type="text" placeholder="Vestigingsplaats" name="vestigingsplaats" autocomplete="off" required>
+
+            <!-- Controleert of telefoonnummer bestaat uit getallen -->
+            <label for="telefoonnummer" name="labeltext">telefoonnummer <i class="fas fa-phone"></i></label>
+            <input type="text" pattern="[0-9].{6,}" maxlength="15" placeholder="Telefoonnummer" name="telefoonnummer" autocomplete="off" required>
+
+            <label for="website_url" name="labeltext">Website_url <i class="fas fa-desktop"></i></label>
+            <input type="text" placeholder="Website_url" name="website_url" autocomplete="off" required>
+
+            <!-- Omschrijving van maximaal 255 tekens -->
+            <label for="omschrijving" name="labeltext">Omschrijving organisatie (MAX. 255 tekens) <i class="fas fa-pen"></i></label>
+            <input type="text" maxlength="255" placeholder="Omschrijving" name="omschrijving" autocomplete="off" required>
+
+            <!-- Wachtwoord van minimaal 5 tekens -->
+            <label for="password">Wachtwoord <i class="fas fa-key"></i></label>
+            <input type="password" minlength="5" placeholder="Wachtwoord" name="password" required>
+
+            <label for="password-repeat">Herhaal wachtwoord <i class="fas fa-key"></i></label>
+            <input type="password"  placeholder="Herhaal wachtwoord" name="password-repeat" required>
+
+            <!-- Registratie button-->
+            <button class="login_button" type="submit">Registreer</button>                      
+        </div>
+    </form>
+</div>
+<!-- Javascript, kleine melding van 2000ms waarbij naam pagina wordt weergegeven -->
+<script>
+    let melding = document.getElementById('melding');
+    setTimeout(function() {
+        melding.style.cssText = "visibility: none; opacity: 0"
+    }, 2000); // <-- time in milliseconds          
+</script>
+{% endblock %}

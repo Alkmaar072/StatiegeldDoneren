@@ -1,0 +1,46 @@
+<!-- Verstuurd code naar application.py -->
+{% extends "layout_register.html" %}
+
+{% block title %}
+    Register user
+{% endblock %}
+
+{% block main %}
+<!-- Logincard gebruiker -->
+<div class="login_body">
+    <h2>Gebruiker</h2>
+    <form action="/action_page.php" method="post">
+        <!-- Foto -->
+        <div class="imgcontainer-beer">
+            <img src="../static/img/avatar.png" alt="profile-beer" class="profile-beer">
+        </div>
+
+        Statiegelddoneren.nl <i class="fas fa-hand-holding-usd"></i>
+        
+        <!-- Opmaak buttons -->
+        <div class="container-beer">
+            <a href="/login_user"><button type="button" class="btn btn-secondary btn-lg btn-block">Login gebruiker</button></a><br><br>
+            <a href="/register_user"><button type="button" class="btn btn-secondary btn-lg btn-block">Registreer gebruiker</button></a>
+        </div>
+    </form>
+</div>
+
+<!-- Logincard organisatie -->
+<div class="login_body">
+    <h2>Organisatie</h2>
+    <form action="/action_page.php" method="post">
+        <!-- Foto -->
+        <div class="imgcontainer-beer">
+            <img src="../static/img/cor_avatar.jpg" alt="profile-beer" class="profile-beer">
+        </div>
+
+        Statiegelddoneren.nl <i class="fas fa-hand-holding-usd"></i>
+        
+        <!-- Opmaak buttons -->
+        <div class="container-beer">
+            <a href="/login_association"><button type="button" class="btn btn-secondary btn-lg btn-block">Login organisatie</button></a><br><br>
+            <a href="/register_association"><button type="button" class="btn btn-secondary btn-lg btn-block">Registreer organisatie</button></a>
+        </div>
+    </form>
+</div>
+{% endblock %}

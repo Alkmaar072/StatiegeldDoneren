@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Verkenner
+{% endblock %}
+
+{% block main %}
+
+<!-- Verkenner-pagina zonder zoekopdracht -->
+{% if not gezocht %}
+
+  <p class="verkenner-tekst">Zoek op organisatie of plaats</p>
+
+<!-- Verkenner-pagina zonder resultaten voor zoekopdracht -->
+{% elif gezocht and not organisaties %}
+
+  <p class="verkenner-tekst">Geen resultaten voor "{{ gezocht }}"</p>
+
+<!-- Verkenner-pagina met zoekopdracht en resultaten -->
+{% else %}
+
+  <div class="verkenner-div">
+    {% for organisatie in organisaties %}
+      <div class="verkenner-card">
+        <div class="pt-4 px-4">
+          <div class="card">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img {{"src=" + organisatie.profilefoto_url if organisatie.profilefoto_url else "src=/static/img/cor_avatar.jpg"}} 
+                class="img-fluid rounded-start" alt="Profielfoto vereniging">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h4 class="card-title text-primary">{{ organisatie.organisatie_naam }}</h4>
+                  <h5 class="card-title">{{ organisatie.vestigingsplaats }}</h5>
+                  <p class="card-text">{{ organisatie.omschrijving }}</p>
+                  <p class="card-text"><small class="text-muted">Aantal punten: {{ organisatie.score }} </small></p>
+                  <a class="btn btn-primary" href={{ "/profile?type=organisatie&id=" +  organisatie.id|string}}>Klik hier om naar profiel te gaan</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    {% endfor %}
+  </div>
+
+{% endif %}
+
+
+<style>
+/* Tekst opmaak verkenner-tekst */
+  .verkenner-tekst{
+    text-align: center;
+    color: dimgray;
+    padding-top: 100px;      
+  }
+ /*  Auto scrollbar verkenner-div */ 
+  .verkenner-div{
+    overflow-y: auto;
+  }
+</style>
+{% endblock %}

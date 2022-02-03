@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+
+    <a class="btn btn-primary" href="/donaties" role="button">Create a Post</a>
+    <a class="btn btn-primary" href="/donaties" role="button">donaties</a>
+    <ul class="list-group list-group-flush">
+        <!-- {% for post in posts %}
+        <li class="list-group-item">
+            <div>
+                <img src="static/images/{{ post["image_name"] }}" width="200">
+                <div>{{ post["text"] }}</div>
+            </div>
+        </li>
+        {% endfor %} -->
+    </ul>
+
+{% endblock %}

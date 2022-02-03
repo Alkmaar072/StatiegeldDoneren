@@ -1,0 +1,52 @@
+<!-- Verstuurd code naar application.py -->
+{% extends "layout_register.html" %}
+
+{% block title %}
+    Register user
+{% endblock %}
+
+{% block main %}
+<!-- Opmaak melding -->
+<div class="melding" id="melding">Inloggen Gebruiker</div>
+            <!-- Logincard gebruiker -->
+            <div class="login_body">
+
+                <h2>Inloggen Gebruiker</h2>
+
+                <form action="/login_user" method="post">
+                    <!-- Foto -->
+                    <div class="imgcontainer-beer">
+                        <img src="../static/img/avatar.png" alt="profile-beer" class="profile-beer">
+                    </div>
+
+                    <h1 class="h3 mb-3 fw-normal">Inloggen</h1>
+
+                    <!-- Input inloggen -->
+                    <div class="container-beer">
+                        <label for="gebruikersnaam">Gebruikersnaam <i class="fas fa-envelope"></i></label>
+                        <input type="text" placeholder="Gebruikersnaam" name="gebruikersnaam" autocomplete="off" required>
+
+                        <label for="wachtwoord">Wachtwoord <i class="fas fa-key"></i></label>
+                        <input type="password" placeholder="Wachtwoord" name="wachtwoord" required>
+
+                        <!-- Opmaak button-->
+                        <button class="login_button" type="submit">Inloggen gebruiker</button>
+
+                        <!-- Checkbox -->
+                        <div class="checkbox mb-3">
+                            <label>
+                              <input type="checkbox" value="remember-me" /> Remember me
+                            </label>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        <!-- Javascript, kleine melding van 2000ms waarbij naam pagina wordt weergegeven -->
+        <script>
+            let melding = document.getElementById('melding');
+            setTimeout(function() {
+            melding.style.cssText = "visibility: none; opacity: 0"
+            }, 2000); // <-- tijd in milliseconden          
+        </script>
+{% endblock %}

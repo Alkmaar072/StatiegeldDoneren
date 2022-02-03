@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+
+    <form action="/create" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <p><input type="file" name="image" id="image"></p>
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="text" placeholder="Text" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Post</button>
+    </form>
+
+{% endblock %}
